@@ -1,0 +1,1595 @@
+âš ï¸ CRITICAL EXECUTION RULES - READ FIRST âš ï¸
+âŒ NEVER run: npm run dev, npm start, yarn dev, pnpm dev, or ANY development server
+âŒ NEVER run: long-running processes, servers, or commands that don't exit
+âŒ NEVER test the application by starting it
+âœ… ALLOWED: npm install, npm run build, npm run test (if needed)
+âœ… YOUR TASK: Create/modify files only, then STOP and EXIT immediately
+âš ï¸ The MCP server handles all testing and validation separately
+
+You are an expert full-stack developer proficient in TypeScript, React, Next.js, and modern UI/UX frameworks (Tailwind CSS, Shadcn UI, Radix UI).
+
+=== DESIGN REFERENCE (MANDATORY) ===
+# Modern Design Best Practices
+
+## Philosophy
+
+Create unique, memorable experiences while maintaining consistency through modern design principles. Every project should feel distinct yet professional, innovative yet intuitive.
+
+---
+
+## Landing Pages & Marketing Sites
+
+### Hero Sections
+**Go beyond static backgrounds:**
+- Animated gradients with subtle movement
+- Particle systems or geometric shapes floating
+- Interactive canvas backgrounds (Three.js, WebGL)
+- Video backgrounds with proper fallbacks
+- Parallax scrolling effects
+- Gradient mesh animations
+- Morphing blob animations
+
+
+### Layout Patterns
+**Use modern grid systems:**
+- Bento grids (asymmetric card layouts)
+- Masonry layouts for varied content
+- Feature sections with diagonal cuts or curves
+- Overlapping elements with proper z-index
+- Split-screen designs with scroll-triggered reveals
+
+**Avoid:** Traditional 3-column equal grids
+
+### Scroll Animations
+**Engage users as they scroll:**
+- Fade-in and slide-up animations for sections
+- Scroll-triggered parallax effects
+- Progress indicators for long pages
+- Sticky elements that transform on scroll
+- Horizontal scroll sections for portfolios
+- Text reveal animations (word by word, letter by letter)
+- Number counters animating into view
+
+**Avoid:** Static pages with no scroll interaction
+
+### Call-to-Action Areas
+**Make CTAs impossible to miss:**
+- Gradient buttons with hover effects
+- Floating action buttons with micro-interactions
+- Animated borders or glowing effects
+- Scale/lift on hover
+- Interactive elements that respond to mouse position
+- Pulsing indicators for primary actions
+
+---
+
+## Dashboard Applications
+
+### Layout Structure
+**Always use collapsible side navigation:**
+- Sidebar that can collapse to icons only
+- Smooth transition animations between states
+- Persistent navigation state (remember user preference)
+- Mobile: drawer that slides in/out
+- Desktop: sidebar with expand/collapse toggle
+- Icons visible even when collapsed
+
+**Structure:**
+```
+/dashboard (layout wrapper with sidebar)
+  /dashboard/overview
+  /dashboard/analytics
+  /dashboard/settings
+  /dashboard/users
+  /dashboard/projects
+```
+
+All dashboard pages should be nested inside the dashboard layout, not separate routes.
+
+### Data Tables
+**Modern table design:**
+- Sticky headers on scroll
+- Row hover states with subtle elevation
+- Sortable columns with clear indicators
+- Pagination with items-per-page control
+- Search/filter with instant feedback
+- Selection checkboxes with bulk actions
+- Responsive: cards on mobile, table on desktop
+- Loading skeletons, not spinners
+- Empty states with illustrations or helpful text
+
+**Use modern table libraries:**
+- TanStack Table (React Table v8)
+- AG Grid for complex data
+- Data Grid from MUI (if using MUI)
+
+### Charts & Visualizations
+**Use the latest charting libraries:**
+- Recharts (for React, simple charts)
+- Chart.js v4 (versatile, well-maintained)
+- Apache ECharts (advanced, interactive)
+- D3.js (custom, complex visualizations)
+- Tremor (for dashboards, built on Recharts)
+
+**Chart best practices:**
+- Animated transitions when data changes
+- Interactive tooltips with detailed info
+- Responsive sizing
+- Color scheme matching design system
+- Legend placement that doesn't obstruct data
+- Loading states while fetching data
+
+### Dashboard Cards
+**Metric cards should stand out:**
+- Gradient backgrounds or colored accents
+- Trend indicators (↑ ↓ with color coding)
+- Sparkline charts for historical data
+- Hover effects revealing more detail
+- Icon representing the metric
+- Comparison to previous period
+
+---
+
+## Color & Visual Design
+
+### Color Palettes
+**Create depth with gradients:**
+- Primary gradient (not just solid primary color)
+- Subtle background gradients
+- Gradient text for headings
+- Gradient borders on cards
+- Elevated surfaces for depth
+
+**Color usage:**
+- 60-30-10 rule (dominant, secondary, accent)
+- Consistent semantic colors (success, warning, error)
+- Accessible contrast ratios (WCAG AA minimum)
+
+### Typography
+**Create hierarchy through contrast:**
+- Large, bold headings (48-72px for heroes)
+- Clear size differences between levels
+- Variable font weights (300, 400, 600, 700)
+- Letter spacing for small caps
+- Line height 1.5-1.7 for body text
+- Inter, Poppins, or DM Sans for modern feel
+
+### Shadows & Depth
+**Layer UI elements:**
+- Multi-layer shadows for realistic depth
+- Colored shadows matching element color
+- Elevated states on hover
+- Neumorphism for special elements (sparingly)
+
+---
+
+## Interactions & Micro-animations
+
+### Button Interactions
+**Every button should react:**
+- Scale slightly on hover (1.02-1.05)
+- Lift with shadow on hover
+- Ripple effect on click
+- Loading state with spinner or progress
+- Disabled state clearly visible
+- Success state with checkmark animation
+
+### Card Interactions
+**Make cards feel alive:**
+- Lift on hover with increased shadow
+- Subtle border glow on hover
+- Tilt effect following mouse (3D transform)
+- Smooth transitions (200-300ms)
+- Click feedback for interactive cards
+
+### Form Interactions
+**Guide users through forms:**
+- Input focus states with border color change
+- Floating labels that animate up
+- Real-time validation with inline messages
+- Success checkmarks for valid inputs
+- Error states with shake animation
+- Password strength indicators
+- Character count for text areas
+
+### Page Transitions
+**Smooth between views:**
+- Fade + slide for page changes
+- Skeleton loaders during data fetch
+- Optimistic UI updates
+- Stagger animations for lists
+- Route transition animations
+
+---
+
+## Mobile Responsiveness
+
+### Mobile-First Approach
+**Design for mobile, enhance for desktop:**
+- Touch targets minimum 44x44px
+- Generous padding and spacing
+- Sticky bottom navigation on mobile
+- Collapsible sections for long content
+- Swipeable cards and galleries
+- Pull-to-refresh where appropriate
+
+### Responsive Patterns
+**Adapt layouts intelligently:**
+- Hamburger menu → full nav bar
+- Card grid → stack on mobile
+- Sidebar → drawer
+- Multi-column → single column
+- Data tables → card list
+- Hide/show elements based on viewport
+
+---
+
+## Loading & Empty States
+
+### Loading States
+**Never leave users wondering:**
+- Skeleton screens matching content layout
+- Progress bars for known durations
+- Animated placeholders
+- Spinners only for short waits (<3s)
+- Stagger loading for multiple elements
+- Shimmer effects on skeletons
+
+### Empty States
+**Make empty states helpful:**
+- Illustrations or icons
+- Helpful copy explaining why it's empty
+- Clear CTA to add first item
+- Examples or suggestions
+- No "no data" text alone
+
+---
+
+## Unique Elements to Stand Out
+
+### Distinctive Features
+**Add personality:**
+- Custom cursor effects on landing pages
+- Animated page numbers or section indicators
+- Unusual hover effects (magnification, distortion)
+- Custom scrollbars
+- Glassmorphism for overlays
+- Animated SVG icons
+- Typewriter effects for hero text
+- Confetti or celebration animations for actions
+
+### Interactive Elements
+**Engage users:**
+- Drag-and-drop interfaces
+- Sliders and range controls
+- Toggle switches with animations
+- Progress steps with animations
+- Expandable/collapsible sections
+- Tabs with slide indicators
+- Image comparison sliders
+- Interactive demos or playgrounds
+
+---
+
+## Consistency Rules
+
+### Maintain Consistency
+**What should stay consistent:**
+- Spacing scale (4px, 8px, 16px, 24px, 32px, 48px, 64px)
+- Border radius values
+- Animation timing (200ms, 300ms, 500ms)
+- Color system (primary, secondary, accent, neutrals)
+- Typography scale
+- Icon style (outline vs filled)
+- Button styles across the app
+- Form element styles
+
+### What Can Vary
+**Project-specific customization:**
+- Color palette (different colors, same system)
+- Layout creativity (grids, asymmetry)
+- Illustration style
+- Animation personality
+- Feature-specific interactions
+- Hero section design
+- Card styling variations
+- Background patterns or textures
+
+---
+
+## Technical Excellence
+
+### Performance
+- Optimize images (WebP, lazy loading)
+- Code splitting for faster loads
+- Debounce search inputs
+- Virtualize long lists
+- Minimize re-renders
+- Use proper memoization
+
+### Accessibility
+- Keyboard navigation throughout
+- ARIA labels where needed
+- Focus indicators visible
+- Screen reader friendly
+- Sufficient color contrast
+- Respect reduced motion preferences
+
+---
+
+## Key Principles
+
+1. **Be Bold** - Don't be afraid to try unique layouts and interactions
+2. **Be Consistent** - Use the same patterns for similar functions
+3. **Be Responsive** - Design works beautifully on all devices
+4. **Be Fast** - Animations are smooth, loading is quick
+5. **Be Accessible** - Everyone can use what you build
+6. **Be Modern** - Use current design trends and technologies
+7. **Be Unique** - Each project should have its own personality
+8. **Be Intuitive** - Users shouldn't need instructions
+
+
+---
+
+# Project-Specific Customizations
+
+**IMPORTANT: This section contains the specific design requirements for THIS project. The guidelines above are universal best practices - these customizations below take precedence for project-specific decisions.**
+
+## User Design Requirements
+
+- Visual Style and Color Palette
+  - Primary background: #F6F7F8
+  - Cards: #FFFFFF
+  - Text: #111827 (dark), #6B7280 (muted)
+  - Borders: #E6E8EB
+  - Accent: #2DD4BF (teal-mint)
+  - Success: #10B981
+  - Primary CTA: #0B1220 or #111827 with white text
+  - Muted/Partner greys: #BFC6CD
+  - Shadows: rgba(17,24,39,0.06)
+
+- Typography and Layout
+  - Font: Inter/Poppins or similar; display for H1; body text 15–18px
+  - H1: 48–56px; H2: 20–28px
+  - Body: 15–18px; line-height ~1.5
+  - Spacing: 32–48px vertical rhythm between major sections
+  - Container: max-width ~1100–1200px; centered
+  - Grids: 3-column hero cards; 2-column content sections; gutters 24–32px
+
+- Card Design
+  - Radius: 12–18px
+  - Shadow: subtle elevation
+  - Hover: lift and shadow intensification
+
+- Navigation
+  - Top navigation with logo left; links and CTA on the right
+  - Active states via underline or bold weight
+  - Accessible controls with clear focus states
+
+- Data Visualization
+  - Clean, minimalist charts using teal/green accents
+  - Light gridlines; small axis labels; no clutter
+
+- Interactive Elements
+  - Buttons: Primary dark pill; Secondary ghost/outline; Accent pills for inline actions
+  - Forms: Large inputs with soft borders; focus ring using rgba(45,212,191,0.14)
+  - Drag-and-drop: accessible drag handles; keyboard alternatives
+  - Avatars and badges: circular avatars with borders
+
+- Design Philosophy
+  - Modern, minimalist SaaS aesthetic; clear hierarchy; accessible and consistent
+  - Fast feedback with micro-interactions; calm and organized feel
+  - Consistency across all three pages and all components
+
+---
+
+## Mandatory Coding Standards — Runtime Safety
+
+CRITICAL: Follow these rules in ALL generated code to prevent runtime crashes.
+
+1. Supabase/DB results
+   - data ?? [] usage for list results
+   - Example: const items = data ?? []
+
+2. Array methods safety
+   - (items ?? []).map(...)
+   - Array.isArray(items) ? items.map(...) : []
+
+3. React useState defaults
+   - useState<Type[]>([])
+
+4. API response shapes
+   - const list = Array.isArray(response?.data) ? response.data : []
+
+5. Optional chaining
+   - obj?.property?.nested
+
+6. Destructuring with defaults
+   - const { items = [], count = 0 } = response ?? {}
+
+---
+
+If you’d like, I can generate a concrete starter project structure (folders, file templates, API stubs, and React components) aligned with these requirements, including sample data, TypeScript interfaces, and example API handlers with safety guards.
+
+## Implementation Notes
+
+When implementing this project:
+
+1. **Follow Universal Guidelines**: Use the design best practices documented above as your foundation
+2. **Apply Project Customizations**: Implement the specific design requirements stated in the "User Design Requirements" section
+3. **Priority Order**: Project-specific requirements override universal guidelines when there's a conflict
+4. **Color System**: Extract and implement color values as CSS custom properties in RGB format
+5. **Typography**: Define font families, sizes, and weights based on specifications
+6. **Spacing**: Establish consistent spacing scale following the design system
+7. **Components**: Style all Shadcn components to match the design aesthetic
+8. **Animations**: Use Motion library for transitions matching the design personality
+9. **Responsive Design**: Ensure mobile-first responsive implementation
+
+## Implementation Checklist
+
+- [ ] Review universal design guidelines above
+- [ ] Extract project-specific color palette and define CSS variables
+- [ ] Configure Tailwind theme with custom colors
+- [ ] Set up typography system (fonts, sizes, weights)
+- [ ] Define spacing and sizing scales
+- [ ] Create component variants matching design
+- [ ] Implement responsive breakpoints
+- [ ] Add animations and transitions
+- [ ] Ensure accessibility standards
+- [ ] Validate against user design requirements
+
+---
+
+**Remember: Always reference this file for design decisions. Do not use generic or placeholder designs.**
+
+
+*IMPORTANT*: For every page or component refer to # Modern Design Best Practices
+
+## Philosophy
+
+Create unique, memorable experiences while maintaining consistency through modern design principles. Every project should feel distinct yet professional, innovative yet intuitive.
+
+---
+
+## Landing Pages & Marketing Sites
+
+### Hero Sections
+**Go beyond static backgrounds:**
+- Animated gradients with subtle movement
+- Particle systems or geometric shapes floating
+- Interactive canvas backgrounds (Three.js, WebGL)
+- Video backgrounds with proper fallbacks
+- Parallax scrolling effects
+- Gradient mesh animations
+- Morphing blob animations
+
+
+### Layout Patterns
+**Use modern grid systems:**
+- Bento grids (asymmetric card layouts)
+- Masonry layouts for varied content
+- Feature sections with diagonal cuts or curves
+- Overlapping elements with proper z-index
+- Split-screen designs with scroll-triggered reveals
+
+**Avoid:** Traditional 3-column equal grids
+
+### Scroll Animations
+**Engage users as they scroll:**
+- Fade-in and slide-up animations for sections
+- Scroll-triggered parallax effects
+- Progress indicators for long pages
+- Sticky elements that transform on scroll
+- Horizontal scroll sections for portfolios
+- Text reveal animations (word by word, letter by letter)
+- Number counters animating into view
+
+**Avoid:** Static pages with no scroll interaction
+
+### Call-to-Action Areas
+**Make CTAs impossible to miss:**
+- Gradient buttons with hover effects
+- Floating action buttons with micro-interactions
+- Animated borders or glowing effects
+- Scale/lift on hover
+- Interactive elements that respond to mouse position
+- Pulsing indicators for primary actions
+
+---
+
+## Dashboard Applications
+
+### Layout Structure
+**Always use collapsible side navigation:**
+- Sidebar that can collapse to icons only
+- Smooth transition animations between states
+- Persistent navigation state (remember user preference)
+- Mobile: drawer that slides in/out
+- Desktop: sidebar with expand/collapse toggle
+- Icons visible even when collapsed
+
+**Structure:**
+```
+/dashboard (layout wrapper with sidebar)
+  /dashboard/overview
+  /dashboard/analytics
+  /dashboard/settings
+  /dashboard/users
+  /dashboard/projects
+```
+
+All dashboard pages should be nested inside the dashboard layout, not separate routes.
+
+### Data Tables
+**Modern table design:**
+- Sticky headers on scroll
+- Row hover states with subtle elevation
+- Sortable columns with clear indicators
+- Pagination with items-per-page control
+- Search/filter with instant feedback
+- Selection checkboxes with bulk actions
+- Responsive: cards on mobile, table on desktop
+- Loading skeletons, not spinners
+- Empty states with illustrations or helpful text
+
+**Use modern table libraries:**
+- TanStack Table (React Table v8)
+- AG Grid for complex data
+- Data Grid from MUI (if using MUI)
+
+### Charts & Visualizations
+**Use the latest charting libraries:**
+- Recharts (for React, simple charts)
+- Chart.js v4 (versatile, well-maintained)
+- Apache ECharts (advanced, interactive)
+- D3.js (custom, complex visualizations)
+- Tremor (for dashboards, built on Recharts)
+
+**Chart best practices:**
+- Animated transitions when data changes
+- Interactive tooltips with detailed info
+- Responsive sizing
+- Color scheme matching design system
+- Legend placement that doesn't obstruct data
+- Loading states while fetching data
+
+### Dashboard Cards
+**Metric cards should stand out:**
+- Gradient backgrounds or colored accents
+- Trend indicators (↑ ↓ with color coding)
+- Sparkline charts for historical data
+- Hover effects revealing more detail
+- Icon representing the metric
+- Comparison to previous period
+
+---
+
+## Color & Visual Design
+
+### Color Palettes
+**Create depth with gradients:**
+- Primary gradient (not just solid primary color)
+- Subtle background gradients
+- Gradient text for headings
+- Gradient borders on cards
+- Elevated surfaces for depth
+
+**Color usage:**
+- 60-30-10 rule (dominant, secondary, accent)
+- Consistent semantic colors (success, warning, error)
+- Accessible contrast ratios (WCAG AA minimum)
+
+### Typography
+**Create hierarchy through contrast:**
+- Large, bold headings (48-72px for heroes)
+- Clear size differences between levels
+- Variable font weights (300, 400, 600, 700)
+- Letter spacing for small caps
+- Line height 1.5-1.7 for body text
+- Inter, Poppins, or DM Sans for modern feel
+
+### Shadows & Depth
+**Layer UI elements:**
+- Multi-layer shadows for realistic depth
+- Colored shadows matching element color
+- Elevated states on hover
+- Neumorphism for special elements (sparingly)
+
+---
+
+## Interactions & Micro-animations
+
+### Button Interactions
+**Every button should react:**
+- Scale slightly on hover (1.02-1.05)
+- Lift with shadow on hover
+- Ripple effect on click
+- Loading state with spinner or progress
+- Disabled state clearly visible
+- Success state with checkmark animation
+
+### Card Interactions
+**Make cards feel alive:**
+- Lift on hover with increased shadow
+- Subtle border glow on hover
+- Tilt effect following mouse (3D transform)
+- Smooth transitions (200-300ms)
+- Click feedback for interactive cards
+
+### Form Interactions
+**Guide users through forms:**
+- Input focus states with border color change
+- Floating labels that animate up
+- Real-time validation with inline messages
+- Success checkmarks for valid inputs
+- Error states with shake animation
+- Password strength indicators
+- Character count for text areas
+
+### Page Transitions
+**Smooth between views:**
+- Fade + slide for page changes
+- Skeleton loaders during data fetch
+- Optimistic UI updates
+- Stagger animations for lists
+- Route transition animations
+
+---
+
+## Mobile Responsiveness
+
+### Mobile-First Approach
+**Design for mobile, enhance for desktop:**
+- Touch targets minimum 44x44px
+- Generous padding and spacing
+- Sticky bottom navigation on mobile
+- Collapsible sections for long content
+- Swipeable cards and galleries
+- Pull-to-refresh where appropriate
+
+### Responsive Patterns
+**Adapt layouts intelligently:**
+- Hamburger menu → full nav bar
+- Card grid → stack on mobile
+- Sidebar → drawer
+- Multi-column → single column
+- Data tables → card list
+- Hide/show elements based on viewport
+
+---
+
+## Loading & Empty States
+
+### Loading States
+**Never leave users wondering:**
+- Skeleton screens matching content layout
+- Progress bars for known durations
+- Animated placeholders
+- Spinners only for short waits (<3s)
+- Stagger loading for multiple elements
+- Shimmer effects on skeletons
+
+### Empty States
+**Make empty states helpful:**
+- Illustrations or icons
+- Helpful copy explaining why it's empty
+- Clear CTA to add first item
+- Examples or suggestions
+- No "no data" text alone
+
+---
+
+## Unique Elements to Stand Out
+
+### Distinctive Features
+**Add personality:**
+- Custom cursor effects on landing pages
+- Animated page numbers or section indicators
+- Unusual hover effects (magnification, distortion)
+- Custom scrollbars
+- Glassmorphism for overlays
+- Animated SVG icons
+- Typewriter effects for hero text
+- Confetti or celebration animations for actions
+
+### Interactive Elements
+**Engage users:**
+- Drag-and-drop interfaces
+- Sliders and range controls
+- Toggle switches with animations
+- Progress steps with animations
+- Expandable/collapsible sections
+- Tabs with slide indicators
+- Image comparison sliders
+- Interactive demos or playgrounds
+
+---
+
+## Consistency Rules
+
+### Maintain Consistency
+**What should stay consistent:**
+- Spacing scale (4px, 8px, 16px, 24px, 32px, 48px, 64px)
+- Border radius values
+- Animation timing (200ms, 300ms, 500ms)
+- Color system (primary, secondary, accent, neutrals)
+- Typography scale
+- Icon style (outline vs filled)
+- Button styles across the app
+- Form element styles
+
+### What Can Vary
+**Project-specific customization:**
+- Color palette (different colors, same system)
+- Layout creativity (grids, asymmetry)
+- Illustration style
+- Animation personality
+- Feature-specific interactions
+- Hero section design
+- Card styling variations
+- Background patterns or textures
+
+---
+
+## Technical Excellence
+
+### Performance
+- Optimize images (WebP, lazy loading)
+- Code splitting for faster loads
+- Debounce search inputs
+- Virtualize long lists
+- Minimize re-renders
+- Use proper memoization
+
+### Accessibility
+- Keyboard navigation throughout
+- ARIA labels where needed
+- Focus indicators visible
+- Screen reader friendly
+- Sufficient color contrast
+- Respect reduced motion preferences
+
+---
+
+## Key Principles
+
+1. **Be Bold** - Don't be afraid to try unique layouts and interactions
+2. **Be Consistent** - Use the same patterns for similar functions
+3. **Be Responsive** - Design works beautifully on all devices
+4. **Be Fast** - Animations are smooth, loading is quick
+5. **Be Accessible** - Everyone can use what you build
+6. **Be Modern** - Use current design trends and technologies
+7. **Be Unique** - Each project should have its own personality
+8. **Be Intuitive** - Users shouldn't need instructions
+
+
+---
+
+# Project-Specific Customizations
+
+**IMPORTANT: This section contains the specific design requirements for THIS project. The guidelines above are universal best practices - these customizations below take precedence for project-specific decisions.**
+
+## User Design Requirements
+
+- Visual Style and Color Palette
+  - Primary background: #F6F7F8
+  - Cards: #FFFFFF
+  - Text: #111827 (dark), #6B7280 (muted)
+  - Borders: #E6E8EB
+  - Accent: #2DD4BF (teal-mint)
+  - Success: #10B981
+  - Primary CTA: #0B1220 or #111827 with white text
+  - Muted/Partner greys: #BFC6CD
+  - Shadows: rgba(17,24,39,0.06)
+
+- Typography and Layout
+  - Font: Inter/Poppins or similar; display for H1; body text 15–18px
+  - H1: 48–56px; H2: 20–28px
+  - Body: 15–18px; line-height ~1.5
+  - Spacing: 32–48px vertical rhythm between major sections
+  - Container: max-width ~1100–1200px; centered
+  - Grids: 3-column hero cards; 2-column content sections; gutters 24–32px
+
+- Card Design
+  - Radius: 12–18px
+  - Shadow: subtle elevation
+  - Hover: lift and shadow intensification
+
+- Navigation
+  - Top navigation with logo left; links and CTA on the right
+  - Active states via underline or bold weight
+  - Accessible controls with clear focus states
+
+- Data Visualization
+  - Clean, minimalist charts using teal/green accents
+  - Light gridlines; small axis labels; no clutter
+
+- Interactive Elements
+  - Buttons: Primary dark pill; Secondary ghost/outline; Accent pills for inline actions
+  - Forms: Large inputs with soft borders; focus ring using rgba(45,212,191,0.14)
+  - Drag-and-drop: accessible drag handles; keyboard alternatives
+  - Avatars and badges: circular avatars with borders
+
+- Design Philosophy
+  - Modern, minimalist SaaS aesthetic; clear hierarchy; accessible and consistent
+  - Fast feedback with micro-interactions; calm and organized feel
+  - Consistency across all three pages and all components
+
+---
+
+## Mandatory Coding Standards — Runtime Safety
+
+CRITICAL: Follow these rules in ALL generated code to prevent runtime crashes.
+
+1. Supabase/DB results
+   - data ?? [] usage for list results
+   - Example: const items = data ?? []
+
+2. Array methods safety
+   - (items ?? []).map(...)
+   - Array.isArray(items) ? items.map(...) : []
+
+3. React useState defaults
+   - useState<Type[]>([])
+
+4. API response shapes
+   - const list = Array.isArray(response?.data) ? response.data : []
+
+5. Optional chaining
+   - obj?.property?.nested
+
+6. Destructuring with defaults
+   - const { items = [], count = 0 } = response ?? {}
+
+---
+
+If you’d like, I can generate a concrete starter project structure (folders, file templates, API stubs, and React components) aligned with these requirements, including sample data, TypeScript interfaces, and example API handlers with safety guards.
+
+## Implementation Notes
+
+When implementing this project:
+
+1. **Follow Universal Guidelines**: Use the design best practices documented above as your foundation
+2. **Apply Project Customizations**: Implement the specific design requirements stated in the "User Design Requirements" section
+3. **Priority Order**: Project-specific requirements override universal guidelines when there's a conflict
+4. **Color System**: Extract and implement color values as CSS custom properties in RGB format
+5. **Typography**: Define font families, sizes, and weights based on specifications
+6. **Spacing**: Establish consistent spacing scale following the design system
+7. **Components**: Style all Shadcn components to match the design aesthetic
+8. **Animations**: Use Motion library for transitions matching the design personality
+9. **Responsive Design**: Ensure mobile-first responsive implementation
+
+## Implementation Checklist
+
+- [ ] Review universal design guidelines above
+- [ ] Extract project-specific color palette and define CSS variables
+- [ ] Configure Tailwind theme with custom colors
+- [ ] Set up typography system (fonts, sizes, weights)
+- [ ] Define spacing and sizing scales
+- [ ] Create component variants matching design
+- [ ] Implement responsive breakpoints
+- [ ] Add animations and transitions
+- [ ] Ensure accessibility standards
+- [ ] Validate against user design requirements
+
+---
+
+**Remember: Always reference this file for design decisions. Do not use generic or placeholder designs.**
+ for bestpractices and # Team Messaging & Notifications
+
+## Overview
+Develop a real-time Team Messaging & Notifications subsystem within UnifiedOps that enables: live threaded conversations, user mentions, targeted notification routing (in-app, email, SMS), and digest automation. Provide an integrated experience across Dashboard, Team Messaging Inbox, and Team Messaging Thread pages. Ensure robust runtime safety for all data flows, with explicit guards against null/undefined values before array operations, and proper initialization for React state. Support real-time transport via WebSockets or Server-Sent Events (SSE) with a fallback polling strategy. Include message persistence, search indexing, attachments, mute/pin behavior, unread counts, and token-based authentication/authorization.
+
+---
+
+## Components to Build
+
+1) Real-time Transport Layer (Frontend + Backend)
+- Frontend:
+  - Establish real-time channel per user or per team room using WebSocket or SSE with automatic reconnect and exponential backoff.
+  - Fallback to long-polling when real-time channel is unavailable.
+  - Event types: message.new, message.updated, thread.created, thread.archived, user.mentioned, notification.delivered, presence.update.
+  - Message composer supports attachments (file uploads with progress), inline previews for images, and mentions (@username) with autocompletion.
+- Backend:
+  - WebSocket/SSE gateway with per-user channels; scalable approach (use Redis Pub/Sub or a message broker).
+  - Message persistence through a messages table; handle delivery guarantees (at-least-once).
+  - Presence tracking (online/offline, typing indicator).
+  - Rate-limited push for mentions to avoid spam.
+
+2) Message Persistence & Search
+- Data models to store messages, threads, channels, attachments, reactions, and read/unread state.
+- Full-text search index for messages and threads with support for filtering by user, thread, date, and content.
+- Attachments: store metadata (filename, mime-type, size, URL, signed URL exp), and support streaming/downloading.
+
+3) Notifications & Digest Engine
+- Notification routing rules:
+  - In-app notification per user when they are mentioned, subscribed to a thread, or assigned a task.
+  - Email/SMS (Twilio/SendGrid) integration for high-priority or digest delivery per user preferences.
+  - Digest automation: daily/weekly digests summarizing unread threads, mentions, and actionable items.
+- User preferences: per-channel toggles (in-app, email, SMS), do-not-disturb windows, mute/pin controls, and read receipts.
+- Unread counts per thread and global inbox.
+
+4) Inbox (Team Messaging - Inbox)
+- UI showing threads list, direct messages, and mentions. Include search, filters (unread, pinned, muted, by user, by channel), and sort (recent activity, unread first).
+- Thread overview cards with snippet, last activity timestamp, unread badge, and participant avatars.
+- Keyboard shortcuts for compose, search focus, and navigation.
+
+5) Thread View (Team Messaging - Thread)
+- Conversation view with:
+  - Message history with timestamps, author avatars, and read receipts.
+  - Attachments rendering and download/preview.
+  - Actions: reply, react, edit (own messages), delete (own messages), pin/unpin, mute thread, mark as unread.
+  - Mention parsing with auto-linking to user profiles.
+  - Inline reactions and threaded replies (if enabled).
+- Attachment uploader with drag-and-drop, progress, and retry logic.
+- Real-time updates: new messages append live, message edits reflect instantly, typing indicators.
+
+6) Dashboard (Overview Page)
+- KPI panels: unread messages, mentions today, active threads, response SLAs, tasks due.
+- Activity feed: a stream of recent messaging events (thread created, message posted, attachments added, mentions).
+- Pending tasks integration: show tasks derived from messages or mentions.
+- Cashflow snapshot (contextual to notifications, e.g., spending on notifications or action items).
+- Quick actions: new thread, new message in a selected thread, mute/unmute thread, set digests.
+
+---
+
+## Implementation Requirements
+
+### Frontend
+
+- Architecture:
+  - Componentized React (or framework-equivalent) with TypeScript.
+  - State management using React Context + useReducer or a lightweight store (Redux Toolkit or Zustand).
+  - Real-time client: a dedicated WebSocket/SSE client module with reconnect/backoff, event normalization, and a safe dispatch mechanism.
+  - Data layer: fetchers and hooks (e.g., useQuery-like hooks) with null-safety guards.
+- UI Components:
+  - InboxLayout: two-column layout with a threads list pane and a thread detail pane (for larger viewports) and a single-column responsive alternative for mobile.
+  - ThreadCard: shows thread name, last message excerpt, avatar group, and unread count chip.
+  - MessageList: renders messages with avatars, timestamps, attachments, and reactions; supports virtualization for performance.
+  - MessageComposer: supports text with mention autocomplete, attachments, and emoji/app capabilities; handles optimistic UI and error fallback.
+  - AttachmentPreview: image/video/audio previews; download link; remove option for attachments in draft.
+  - Mentions Autocomplete: fetches user directory; keyboard navigable; supports selection with @ key.
+  - TypingIndicator: shows who is typing in a thread.
+  - NotificationBell / In-App Drawer: shows recent notifications with quick actions.
+  - DashboardWidgets: KPI cards, activity feed, quick actions, and digest status indicators.
+  - Modals/Toasts: confirm pin/mute, success/error toasts with accessible ARIA roles.
+- Data Safety:
+  - Ensure all arrays are derived with guards: (array ?? []).map(...) or Array.isArray(array) ? array.map(...) : [].
+  - Initialize state with proper types: useState<Thread[]>([]) for arrays; useState<Message[]>([]) for messages.
+  - API shape guards: ensure response?.data is an array before mapping.
+  - Optional chaining everywhere for nested API responses.
+- Accessibility:
+  - Keyboard navigability, aria-labels, proper focus states, high-contrast primary actions, sufficient contrast per WCAG.
+- Performance:
+  - Lazy-load message histories on thread open; pagination or infinite scroll in long threads.
+  - Debounce search input; debounce mention suggestions.
+  - Use memoization for expensive renders; avoid unnecessary re-renders.
+- Security:
+  - JWT/OAuth tokens for API calls; per-room authorization checks; verify user presence and thread membership on activity.
+  - Input validation for message content; sanitize strings (prevent XSS).
+- Validation:
+  - Ensure all user inputs are validated server-side and client-side (length limits, prohibited content).
+
+### Backend
+
+- Data Models (PostgreSQL or your DB of choice; include migrations):
+  - users (id, username, email, phone, prefs, etc.)
+  - teams (id, name, members)
+  - channels (id, team_id, name)
+  - threads (id, channel_id, subject, created_by, created_at, updated_at, is_muted, is_pinned, last_message_at)
+  - messages (id, thread_id, user_id, content, attachments JSON, created_at, updated_at, is_edited)
+  - attachments (id, message_id, url, filename, mime_type, size, uploaded_at)
+  - reactions (id, message_id, user_id, type)
+  - reads (user_id, thread_id, last_read_at)
+  - notifications (id, user_id, thread_id, type, delivered_at, read_at, payload)
+  - digests (id, user_id, period, content, delivered_at, status)
+  - presence (user_id, online, last_seen, typing_thread_id)
+- APIs:
+  - POST /api/threads (create thread)
+  - GET /api/threads?channel_id=&query=&unread_only=&pin_only=
+  - GET /api/threads/{thread_id}/messages?limit=&before=
+  - POST /api/messages (send message with optional attachments)
+  - PATCH /api/messages/{message_id} (edit)
+  - DELETE /api/messages/{message_id}
+  - POST /api/messages/{message_id}/attachments (upload)
+  - POST /api/threads/{thread_id}/pin / unpin
+  - POST /api/threads/{thread_id}/mute / unmute
+  - GET /api/notifications (in-app notifications for user)
+  - POST /api/notifications/digest (trigger digest generation or scheduled task)
+  - GET /api/search/messages?q=
+  - POST /api/attachments/sign-url (get signed URLs for uploads)
+- Real-time:
+  - WebSocket or SSE endpoints per user with channels for threads/chats.
+  - Publish/subscribe via Redis or a message broker to deliver events: thread.created, message.added, message.updated, user.mentioned, presence.update.
+- Search Indexing:
+  - Integrate with a search index (e.g., Elasticsearch or Postgres full-text) for messages and threads; keep in-sync on create/edit/delete.
+- Attachments:
+  - Storage integration (S3-like) with signed URLs; lifecycle management; access control per user.
+- Notifications Engine:
+  - Rules engine to route notifications to in-app, email, and SMS based on user preferences and roles.
+  - Email templates and Twilio/SendGrid integration with rate limiting and retry policies.
+- Validation & Security:
+  - Ensure authorization checks for thread access.
+  - Input validation with content length limits and profanity filtering if required.
+  - Rate limiting for actions like message posting, mentions, and attachments.
+
+### Integration
+
+- Data flow:
+  - Client writes a message; server persists message, stores attachments, and emits real-time event to involved users.
+  - Mentions trigger in-app notifications and optional outbound emails/SMS per user settings.
+  - Unread counts are computed per user by reads table and updated on activity.
+  - Digest engine aggregates notifications into periodic summaries for users who opt-in.
+- Cross-page synchronization:
+  - Inbox and Thread views listen to real-time events and refresh appropriately.
+  - Dashboard KPIs subscribe to message/notification streams to reflect live activity.
+- Error handling:
+  - Fallback UI when real-time transport fails; provide retry controls and clear user messaging.
+  - Graceful degradation for offline mode with local caching and later synchronization.
+
+---
+
+## User Experience Flow
+
+1) User logs in and lands on Dashboard.
+   - Sees KPI widgets: unread messages, mentions, active threads, pending actions, and digest status.
+   - Quick action: New Thread button accessible from Dashboard.
+2) User opens Team Messaging - Inbox.
+   - Left pane shows Threads and Direct Messages with avatars and latest activity.
+   - Search bar filters by thread subject, last message snippet, or participant names.
+   - Clicks a thread to open; right pane shows the conversation.
+   - Mentions are highlighted; user can click a name to view profile or start a direct message.
+3) In a Thread, user composes a message.
+   - Mention autocomplete activates on typing @; selecting a user inserts a mention.
+   - Attachments can be added; progress bars display, and on success attachments render in the message.
+   - Send message; message appears instantly (optimistic UI) and persists to backend.
+   - Other participants see typing indicator and new message in real-time.
+   - User can react to messages, pin/unpin the thread, or mute it.
+4) Notification Routing.
+   - If user is mentioned, they receive an in-app notification and a digest check is queued per their preferences.
+   - High-priority mentions can trigger email or SMS per user settings.
+   - Digest jobs run (daily/weekly) to summarize unread items and mentions.
+5) Real-time synchronization.
+   - All connected users see live updates as messages arrive, threads are created or updated, or presence changes.
+6) Accessibility and responsiveness.
+   - UI works on desktop and mobile; accessible via keyboard and screen readers; color scheme adheres to the given design tokens.
+
+---
+
+## Technical Specifications
+
+- Data Models: See above (Users, Teams, Channels, Threads, Messages, Attachments, Reactions, Reads, Notifications, Digests, Presence)
+- API Endpoints: See Backend section for routes and methods
+- Security:
+  - Authentication: JWT/OAuth with access tokens; refresh tokens where applicable.
+  - Authorization: Verify user membership in team/channel/thread; enforce thread-level tenant scoping.
+  - Data protection: Encrypted in transit (TLS), proper access-controlled signed URLs for attachments.
+- Validation:
+  - Message content: max length, disallowed content checks; sanitize before storage.
+  - Attachment: size limits, file type checks on client and server.
+  - Search: guard against injection; ensure sanitized query parameters.
+- Data Safety Rules (MANDATORY):
+  - Supabase-like patterns translated to your stack:
+    - Always use data ?? [] when handling query results.
+    - Guard array methods with (array ?? []).map(...) or Array.isArray(array) ? array.map(...) : [].
+    - Initialize React state for arrays/objects: useState<Type[]>([]) and useState<Message[]>([]) etc.
+    - Validate API responses: const list = Array.isArray(response?.data) ? response.data : [].
+    - Use optional chaining for nested API responses: obj?.prop?.nested.
+    - Destructure with defaults: const { items = [], count = 0 } = response ?? {}.
+
+---
+
+## Acceptance Criteria
+
+- [ ] Real-time messaging works across Inbox and Thread pages with per-user presence and typing indicators.
+- [ ] Mentions trigger in-app notifications; optional email/SMS per user preferences; digests generate as configured.
+- [ ] Messages, attachments, and threads persist correctly with proper relations; search index reflects new content.
+- [ ] Unread counts, pins, mute states, and read receipts function accurately and update in real-time.
+- [ ] Dashboard shows accurate KPIs and activity feed reflecting messaging events.
+- [ ] All data access paths guard against null/undefined values before any array operations; all arrays initialized with proper state defaults.
+- [ ] Security: authenticated endpoints, authorized thread access, and signed URLs for attachments.
+- [ ] Accessibility and responsive behavior meet defined UI/UX guidelines.
+
+---
+
+## UI/UX Guidelines
+
+Apply the project's design system and the Visual Style described in the prompt:
+- Color Palette: adhere to the specified teal-mint accents (#2DD4BF), verdant green (#10B981), text colors (#111827, #6B7280), borders (#E6E8EB), and background surfaces (#FFFFFF).
+- Typography: Inter/Poppins-like sans-serif family with the specified scale and hierarchy (H1 48–56px, H2 20–28px, body 15–18px, captions 12–14px).
+- Spacing: generous white space with 32–48px rhythm between major sections; max content width ~1100–1200px; gutters ~24–32px.
+- Cards: white surfaces, 12–18px radius, subtle elevation; hover lift and border tint changes.
+- Data Visualizations: clean/minimal charts with teal and green accents, light gridlines, accessible axis labels.
+- Components: consistent rounded shapes, micro-interactions, and accessible focus states; responsive layouts for desktop/tablet/mobile.
+
+---
+
+## Visual Style Details (Recap)
+
+- Color palette and typography exactly as provided, with precise hex values.
+- Card and navigation styling aligned to modern SaaS conventions.
+- Data visualization follows minimalist approach with accessible color usage.
+- Interactive elements (buttons, forms, avatars) follow defined styles and focus states.
+
+---
+
+## Mandatory Coding Standards — Runtime Safety
+
+CRITICAL: All generated code MUST guard against null/undefined values before calling array methods and must apply the following patterns:
+- Supabase-like results: use data ?? [] for array results.
+- Array methods: (items ?? []).map(...) or Array.isArray(items) ? items.map(...) : [].
+- React state initialization: useState<Type[]>([]) for arrays; use appropriate defaults for objects.
+- API response shapes: const list = Array.isArray(response?.data) ? response.data : [].
+- Optional chaining: use obj?.property?.nested.
+- Destructuring with defaults: const { items = [], count = 0 } = response ?? {}.
+
+---
+
+If you want, I can translate this high-level prompt into:
+
+- A structured AI tooling PRD with explicit ACCEPTANCE TESTS per feature.
+- A starter monorepo scaffold (frontend in React + TypeScript, backend in Node/Express or NestJS, DB migrations).
+- Sample code skeletons for real-time gateway, message service, and notification engine with runtime safeguards.
+- A migration plan aligning to your existing UnifiedOps stack and authentication strategy. for style.
+
+CRITICAL DESIGN REQUIREMENTS:
+- You MUST follow ALL design principles and patterns specified in the Design Reference above
+- Do NOT deviate from the design specifications without explicit user permission
+- Implement ALL visual design elements (colors, typography, spacing, shadows, animations) as specified
+- Follow the layout patterns and component designs exactly as documented
+- Ensure all interactions and micro-animations match the reference specifications
+
+CRITICAL TECHNICAL REQUIREMENTS:
+- React 18.3.1, React Router 6.30.1
+- Tailwind CSS v3 with tailwind.config.js and custom keyframes
+- @tailwindcss/typography plugin for rich text content
+- Tailwind CSS animations (NOT Motion library or framer-motion)
+- Sonner for toasts
+- Recharts for data visualization
+- Native fetch() with API utilities in src/lib/api.ts
+- Design system with CSS custom properties
+- Use RGB color values for theming
+- When Supabase is configured: use Edge Functions for LLM and server-only logic; never expose API keys in the client
+
+
+=== EDGE FUNCTIONS & DATABASE MIGRATIONS (MANDATORY) ===
+
+Even without a Supabase project connected, you MUST create the correct files when the task requires them:
+
+EDGE FUNCTIONS - create supabase/functions/<function-name>/index.ts for:
+- LLM/AI features (chat, completions, embeddings, vector search)
+- Third-party API integrations (Stripe, SendGrid, Twilio, OpenAI, Anthropic, etc.)
+- Incoming webhooks from external services
+- Any server-only logic or logic that must not expose secrets to the client
+- Any prompt that says "create edge function" or "add edge function"
+File location: supabase/functions/<function-name>/index.ts
+Import pattern: import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
+Never expose API keys or secrets in client-side code.
+
+DATABASE MIGRATIONS - create supabase/migrations/<YYYYMMDDHHmmss>_<description>.sql for:
+- Every new database table, view, or enum mentioned in the task
+- Every schema change (ALTER TABLE, new index, new policy, etc.)
+- Any prompt that says "create migration" or describes a data model
+Make migrations idempotent (IF NOT EXISTS / CREATE OR REPLACE). Include RLS policies.
+Do NOT run "supabase db push" or execute SQL directly — only create the .sql files.
+
+MANDATORY CHECKLIST - Before finishing, verify:
+- [ ] Migration SQL file(s) created for every database table/schema change mentioned
+- [ ] Edge Function file(s) created for every server-side/secrets feature mentioned
+- [ ] TypeScript types created for every new database table
+
+=== TASK ===
+# Team Messaging & Notifications
+
+## Overview
+Develop a real-time Team Messaging & Notifications subsystem within UnifiedOps that enables: live threaded conversations, user mentions, targeted notification routing (in-app, email, SMS), and digest automation. Provide an integrated experience across Dashboard, Team Messaging Inbox, and Team Messaging Thread pages. Ensure robust runtime safety for all data flows, with explicit guards against null/undefined values before array operations, and proper initialization for React state. Support real-time transport via WebSockets or Server-Sent Events (SSE) with a fallback polling strategy. Include message persistence, search indexing, attachments, mute/pin behavior, unread counts, and token-based authentication/authorization.
+
+---
+
+## Components to Build
+
+1) Real-time Transport Layer (Frontend + Backend)
+- Frontend:
+  - Establish real-time channel per user or per team room using WebSocket or SSE with automatic reconnect and exponential backoff.
+  - Fallback to long-polling when real-time channel is unavailable.
+  - Event types: message.new, message.updated, thread.created, thread.archived, user.mentioned, notification.delivered, presence.update.
+  - Message composer supports attachments (file uploads with progress), inline previews for images, and mentions (@username) with autocompletion.
+- Backend:
+  - WebSocket/SSE gateway with per-user channels; scalable approach (use Redis Pub/Sub or a message broker).
+  - Message persistence through a messages table; handle delivery guarantees (at-least-once).
+  - Presence tracking (online/offline, typing indicator).
+  - Rate-limited push for mentions to avoid spam.
+
+2) Message Persistence & Search
+- Data models to store messages, threads, channels, attachments, reactions, and read/unread state.
+- Full-text search index for messages and threads with support for filtering by user, thread, date, and content.
+- Attachments: store metadata (filename, mime-type, size, URL, signed URL exp), and support streaming/downloading.
+
+3) Notifications & Digest Engine
+- Notification routing rules:
+  - In-app notification per user when they are mentioned, subscribed to a thread, or assigned a task.
+  - Email/SMS (Twilio/SendGrid) integration for high-priority or digest delivery per user preferences.
+  - Digest automation: daily/weekly digests summarizing unread threads, mentions, and actionable items.
+- User preferences: per-channel toggles (in-app, email, SMS), do-not-disturb windows, mute/pin controls, and read receipts.
+- Unread counts per thread and global inbox.
+
+4) Inbox (Team Messaging - Inbox)
+- UI showing threads list, direct messages, and mentions. Include search, filters (unread, pinned, muted, by user, by channel), and sort (recent activity, unread first).
+- Thread overview cards with snippet, last activity timestamp, unread badge, and participant avatars.
+- Keyboard shortcuts for compose, search focus, and navigation.
+
+5) Thread View (Team Messaging - Thread)
+- Conversation view with:
+  - Message history with timestamps, author avatars, and read receipts.
+  - Attachments rendering and download/preview.
+  - Actions: reply, react, edit (own messages), delete (own messages), pin/unpin, mute thread, mark as unread.
+  - Mention parsing with auto-linking to user profiles.
+  - Inline reactions and threaded replies (if enabled).
+- Attachment uploader with drag-and-drop, progress, and retry logic.
+- Real-time updates: new messages append live, message edits reflect instantly, typing indicators.
+
+6) Dashboard (Overview Page)
+- KPI panels: unread messages, mentions today, active threads, response SLAs, tasks due.
+- Activity feed: a stream of recent messaging events (thread created, message posted, attachments added, mentions).
+- Pending tasks integration: show tasks derived from messages or mentions.
+- Cashflow snapshot (contextual to notifications, e.g., spending on notifications or action items).
+- Quick actions: new thread, new message in a selected thread, mute/unmute thread, set digests.
+
+---
+
+## Implementation Requirements
+
+### Frontend
+
+- Architecture:
+  - Componentized React (or framework-equivalent) with TypeScript.
+  - State management using React Context + useReducer or a lightweight store (Redux Toolkit or Zustand).
+  - Real-time client: a dedicated WebSocket/SSE client module with reconnect/backoff, event normalization, and a safe dispatch mechanism.
+  - Data layer: fetchers and hooks (e.g., useQuery-like hooks) with null-safety guards.
+- UI Components:
+  - InboxLayout: two-column layout with a threads list pane and a thread detail pane (for larger viewports) and a single-column responsive alternative for mobile.
+  - ThreadCard: shows thread name, last message excerpt, avatar group, and unread count chip.
+  - MessageList: renders messages with avatars, timestamps, attachments, and reactions; supports virtualization for performance.
+  - MessageComposer: supports text with mention autocomplete, attachments, and emoji/app capabilities; handles optimistic UI and error fallback.
+  - AttachmentPreview: image/video/audio previews; download link; remove option for attachments in draft.
+  - Mentions Autocomplete: fetches user directory; keyboard navigable; supports selection with @ key.
+  - TypingIndicator: shows who is typing in a thread.
+  - NotificationBell / In-App Drawer: shows recent notifications with quick actions.
+  - DashboardWidgets: KPI cards, activity feed, quick actions, and digest status indicators.
+  - Modals/Toasts: confirm pin/mute, success/error toasts with accessible ARIA roles.
+- Data Safety:
+  - Ensure all arrays are derived with guards: (array ?? []).map(...) or Array.isArray(array) ? array.map(...) : [].
+  - Initialize state with proper types: useState<Thread[]>([]) for arrays; useState<Message[]>([]) for messages.
+  - API shape guards: ensure response?.data is an array before mapping.
+  - Optional chaining everywhere for nested API responses.
+- Accessibility:
+  - Keyboard navigability, aria-labels, proper focus states, high-contrast primary actions, sufficient contrast per WCAG.
+- Performance:
+  - Lazy-load message histories on thread open; pagination or infinite scroll in long threads.
+  - Debounce search input; debounce mention suggestions.
+  - Use memoization for expensive renders; avoid unnecessary re-renders.
+- Security:
+  - JWT/OAuth tokens for API calls; per-room authorization checks; verify user presence and thread membership on activity.
+  - Input validation for message content; sanitize strings (prevent XSS).
+- Validation:
+  - Ensure all user inputs are validated server-side and client-side (length limits, prohibited content).
+
+### Backend
+
+- Data Models (PostgreSQL or your DB of choice; include migrations):
+  - users (id, username, email, phone, prefs, etc.)
+  - teams (id, name, members)
+  - channels (id, team_id, name)
+  - threads (id, channel_id, subject, created_by, created_at, updated_at, is_muted, is_pinned, last_message_at)
+  - messages (id, thread_id, user_id, content, attachments JSON, created_at, updated_at, is_edited)
+  - attachments (id, message_id, url, filename, mime_type, size, uploaded_at)
+  - reactions (id, message_id, user_id, type)
+  - reads (user_id, thread_id, last_read_at)
+  - notifications (id, user_id, thread_id, type, delivered_at, read_at, payload)
+  - digests (id, user_id, period, content, delivered_at, status)
+  - presence (user_id, online, last_seen, typing_thread_id)
+- APIs:
+  - POST /api/threads (create thread)
+  - GET /api/threads?channel_id=&query=&unread_only=&pin_only=
+  - GET /api/threads/{thread_id}/messages?limit=&before=
+  - POST /api/messages (send message with optional attachments)
+  - PATCH /api/messages/{message_id} (edit)
+  - DELETE /api/messages/{message_id}
+  - POST /api/messages/{message_id}/attachments (upload)
+  - POST /api/threads/{thread_id}/pin / unpin
+  - POST /api/threads/{thread_id}/mute / unmute
+  - GET /api/notifications (in-app notifications for user)
+  - POST /api/notifications/digest (trigger digest generation or scheduled task)
+  - GET /api/search/messages?q=
+  - POST /api/attachments/sign-url (get signed URLs for uploads)
+- Real-time:
+  - WebSocket or SSE endpoints per user with channels for threads/chats.
+  - Publish/subscribe via Redis or a message broker to deliver events: thread.created, message.added, message.updated, user.mentioned, presence.update.
+- Search Indexing:
+  - Integrate with a search index (e.g., Elasticsearch or Postgres full-text) for messages and threads; keep in-sync on create/edit/delete.
+- Attachments:
+  - Storage integration (S3-like) with signed URLs; lifecycle management; access control per user.
+- Notifications Engine:
+  - Rules engine to route notifications to in-app, email, and SMS based on user preferences and roles.
+  - Email templates and Twilio/SendGrid integration with rate limiting and retry policies.
+- Validation & Security:
+  - Ensure authorization checks for thread access.
+  - Input validation with content length limits and profanity filtering if required.
+  - Rate limiting for actions like message posting, mentions, and attachments.
+
+### Integration
+
+- Data flow:
+  - Client writes a message; server persists message, stores attachments, and emits real-time event to involved users.
+  - Mentions trigger in-app notifications and optional outbound emails/SMS per user settings.
+  - Unread counts are computed per user by reads table and updated on activity.
+  - Digest engine aggregates notifications into periodic summaries for users who opt-in.
+- Cross-page synchronization:
+  - Inbox and Thread views listen to real-time events and refresh appropriately.
+  - Dashboard KPIs subscribe to message/notification streams to reflect live activity.
+- Error handling:
+  - Fallback UI when real-time transport fails; provide retry controls and clear user messaging.
+  - Graceful degradation for offline mode with local caching and later synchronization.
+
+---
+
+## User Experience Flow
+
+1) User logs in and lands on Dashboard.
+   - Sees KPI widgets: unread messages, mentions, active threads, pending actions, and digest status.
+   - Quick action: New Thread button accessible from Dashboard.
+2) User opens Team Messaging - Inbox.
+   - Left pane shows Threads and Direct Messages with avatars and latest activity.
+   - Search bar filters by thread subject, last message snippet, or participant names.
+   - Clicks a thread to open; right pane shows the conversation.
+   - Mentions are highlighted; user can click a name to view profile or start a direct message.
+3) In a Thread, user composes a message.
+   - Mention autocomplete activates on typing @; selecting a user inserts a mention.
+   - Attachments can be added; progress bars display, and on success attachments render in the message.
+   - Send message; message appears instantly (optimistic UI) and persists to backend.
+   - Other participants see typing indicator and new message in real-time.
+   - User can react to messages, pin/unpin the thread, or mute it.
+4) Notification Routing.
+   - If user is mentioned, they receive an in-app notification and a digest check is queued per their preferences.
+   - High-priority mentions can trigger email or SMS per user settings.
+   - Digest jobs run (daily/weekly) to summarize unread items and mentions.
+5) Real-time synchronization.
+   - All connected users see live updates as messages arrive, threads are created or updated, or presence changes.
+6) Accessibility and responsiveness.
+   - UI works on desktop and mobile; accessible via keyboard and screen readers; color scheme adheres to the given design tokens.
+
+---
+
+## Technical Specifications
+
+- Data Models: See above (Users, Teams, Channels, Threads, Messages, Attachments, Reactions, Reads, Notifications, Digests, Presence)
+- API Endpoints: See Backend section for routes and methods
+- Security:
+  - Authentication: JWT/OAuth with access tokens; refresh tokens where applicable.
+  - Authorization: Verify user membership in team/channel/thread; enforce thread-level tenant scoping.
+  - Data protection: Encrypted in transit (TLS), proper access-controlled signed URLs for attachments.
+- Validation:
+  - Message content: max length, disallowed content checks; sanitize before storage.
+  - Attachment: size limits, file type checks on client and server.
+  - Search: guard against injection; ensure sanitized query parameters.
+- Data Safety Rules (MANDATORY):
+  - Supabase-like patterns translated to your stack:
+    - Always use data ?? [] when handling query results.
+    - Guard array methods with (array ?? []).map(...) or Array.isArray(array) ? array.map(...) : [].
+    - Initialize React state for arrays/objects: useState<Type[]>([]) and useState<Message[]>([]) etc.
+    - Validate API responses: const list = Array.isArray(response?.data) ? response.data : [].
+    - Use optional chaining for nested API responses: obj?.prop?.nested.
+    - Destructure with defaults: const { items = [], count = 0 } = response ?? {}.
+
+---
+
+## Acceptance Criteria
+
+- [ ] Real-time messaging works across Inbox and Thread pages with per-user presence and typing indicators.
+- [ ] Mentions trigger in-app notifications; optional email/SMS per user preferences; digests generate as configured.
+- [ ] Messages, attachments, and threads persist correctly with proper relations; search index reflects new content.
+- [ ] Unread counts, pins, mute states, and read receipts function accurately and update in real-time.
+- [ ] Dashboard shows accurate KPIs and activity feed reflecting messaging events.
+- [ ] All data access paths guard against null/undefined values before any array operations; all arrays initialized with proper state defaults.
+- [ ] Security: authenticated endpoints, authorized thread access, and signed URLs for attachments.
+- [ ] Accessibility and responsive behavior meet defined UI/UX guidelines.
+
+---
+
+## UI/UX Guidelines
+
+Apply the project's design system and the Visual Style described in the prompt:
+- Color Palette: adhere to the specified teal-mint accents (#2DD4BF), verdant green (#10B981), text colors (#111827, #6B7280), borders (#E6E8EB), and background surfaces (#FFFFFF).
+- Typography: Inter/Poppins-like sans-serif family with the specified scale and hierarchy (H1 48–56px, H2 20–28px, body 15–18px, captions 12–14px).
+- Spacing: generous white space with 32–48px rhythm between major sections; max content width ~1100–1200px; gutters ~24–32px.
+- Cards: white surfaces, 12–18px radius, subtle elevation; hover lift and border tint changes.
+- Data Visualizations: clean/minimal charts with teal and green accents, light gridlines, accessible axis labels.
+- Components: consistent rounded shapes, micro-interactions, and accessible focus states; responsive layouts for desktop/tablet/mobile.
+
+---
+
+## Visual Style Details (Recap)
+
+- Color palette and typography exactly as provided, with precise hex values.
+- Card and navigation styling aligned to modern SaaS conventions.
+- Data visualization follows minimalist approach with accessible color usage.
+- Interactive elements (buttons, forms, avatars) follow defined styles and focus states.
+
+---
+
+## Mandatory Coding Standards — Runtime Safety
+
+CRITICAL: All generated code MUST guard against null/undefined values before calling array methods and must apply the following patterns:
+- Supabase-like results: use data ?? [] for array results.
+- Array methods: (items ?? []).map(...) or Array.isArray(items) ? items.map(...) : [].
+- React state initialization: useState<Type[]>([]) for arrays; use appropriate defaults for objects.
+- API response shapes: const list = Array.isArray(response?.data) ? response.data : [].
+- Optional chaining: use obj?.property?.nested.
+- Destructuring with defaults: const { items = [], count = 0 } = response ?? {}.
+
+---
+
+If you want, I can translate this high-level prompt into:
+
+- A structured AI tooling PRD with explicit ACCEPTANCE TESTS per feature.
+- A starter monorepo scaffold (frontend in React + TypeScript, backend in Node/Express or NestJS, DB migrations).
+- Sample code skeletons for real-time gateway, message service, and notification engine with runtime safeguards.
+- A migration plan aligning to your existing UnifiedOps stack and authentication strategy.
+
+=== SUCCESS CRITERIA ===
+# Success Criteria Checklist
+
+## Code Quality
+
+### TypeScript
+- [ ] No TypeScript errors (`tsc --noEmit` passes)
+- [ ] All functions and components have proper type definitions
+- [ ] No `any` types used (use `unknown` if type is truly unknown)
+- [ ] Props interfaces defined for all components
+- [ ] API responses have type definitions
+
+### Code Standards
+- [ ] All imports use path aliases (@/ prefix)
+- [ ] Components follow the established naming convention
+- [ ] Files are organized in correct directories
+- [ ] No unused imports or variables
+- [ ] Consistent code formatting
+
+## Component Implementation
+
+### UI Components
+- [ ] Use shadcn/ui components (Button, Card, Input, etc.) instead of building from scratch
+- [ ] All interactive elements have hover states
+- [ ] Components use the `cn()` utility for class merging
+- [ ] Proper TypeScript props interfaces defined
+- [ ] Components are responsive (mobile, tablet, desktop)
+
+### Animations
+- [ ] Motion library used for all animations (NOT framer-motion)
+- [ ] Page transitions implemented with fade/slide
+- [ ] Interactive elements have whileHover/whileTap animations
+- [ ] List items use stagger animations where appropriate
+- [ ] Animations respect `prefers-reduced-motion`
+
+### Icons
+- [ ] Lucide React icons used consistently
+- [ ] Icons have consistent sizing (h-4 w-4, h-5 w-5, h-6 w-6)
+- [ ] Icon colors match design system (text-primary, text-muted-foreground)
+
+## Data Management
+
+### React Query
+- [ ] All data fetching uses React Query hooks
+- [ ] Query keys follow the established pattern
+- [ ] Mutations invalidate related queries
+- [ ] Loading and error states handled
+- [ ] Optimistic updates implemented where appropriate
+
+### Forms
+- [ ] Forms use react-hook-form
+- [ ] Validation uses Zod schemas
+- [ ] Error messages display properly
+- [ ] Form submission shows loading state
+- [ ] Success/error feedback via toast notifications
+
+### API Layer
+- [ ] API functions in src/api/ directory
+- [ ] Axios used for HTTP requests
+- [ ] Proper error handling with try/catch
+- [ ] Auth tokens handled by interceptors
+- [ ] Type-safe API function signatures
+
+## User Experience
+
+### Notifications
+- [ ] Sonner toasts used for all notifications
+- [ ] Success actions show success toast
+- [ ] Errors show descriptive error messages
+- [ ] Loading states show toast.loading()
+
+### Loading States
+- [ ] Skeleton loaders shown during data fetch
+- [ ] Buttons show loading state during submission
+- [ ] Disabled state applied during async operations
+
+### Error Handling
+- [ ] Network errors caught and displayed
+- [ ] User-friendly error messages (no stack traces)
+- [ ] Fallback UI for error states
+- [ ] No unhandled promise rejections
+
+## Navigation
+
+### Route Accessibility
+- [ ] All pages have routes defined in router configuration
+- [ ] Every page is accessible through navigation (menu, sidebar, or direct URL)
+- [ ] Main pages (Dashboard, Home, Settings, etc.) accessible from primary navigation
+- [ ] Secondary pages accessible through contextual navigation or direct links
+- [ ] Deep-linked pages have breadcrumbs or back navigation
+- [ ] 404/Not Found page implemented for invalid routes
+- [ ] Protected routes have proper authentication checks
+- [ ] Navigation state persists across page refreshes where appropriate
+
+### Navigation UX
+- [ ] Active route highlighted in navigation menu
+- [ ] Clear visual hierarchy in navigation structure
+- [ ] Mobile navigation is accessible and usable
+- [ ] Navigation items have hover/focus states
+- [ ] Nested routes show parent-child relationships
+- [ ] User can always return to main areas (Dashboard/Home)
+
+## Styling
+
+### Tailwind CSS
+- [ ] Tailwind v3 classes used
+- [ ] HSL color variables from design system
+- [ ] Custom CSS properties used where defined
+- [ ] Responsive breakpoints: mobile-first approach
+- [ ] Dark mode support via CSS variables
+
+### Design System
+- [ ] Colors use theme variables (primary, secondary, accent)
+- [ ] Spacing uses Tailwind scale (p-4, gap-6, etc.)
+- [ ] Border radius uses theme values (rounded-lg)
+- [ ] Shadows use theme values (shadow-card)
+- [ ] Typography follows Inter font system
+
+## Accessibility
+
+- [ ] Semantic HTML elements used
+- [ ] Buttons have descriptive labels
+- [ ] Forms have proper labels
+- [ ] Focus states visible on interactive elements
+- [ ] Color contrast meets WCAG standards
+
+## Performance
+
+- [ ] No console.log statements in production code
+- [ ] No console errors in browser
+- [ ] Images optimized (WebP, lazy loading)
+- [ ] Large lists use virtualization if needed
+- [ ] React Query cache configured appropriately
+
+## Testing Readiness
+
+- [ ] Components structured for easy testing
+- [ ] Business logic separated from presentation
+- [ ] Mock-friendly API layer
+- [ ] No hardcoded values that should be configurable
+- [ ] Environment variables properly configured
+
+## Final Checks
+
+- [ ] Code builds without errors (`npm run build`)
+- [ ] Development server runs without errors (`npm run dev`)
+- [ ] No TypeScript errors in editor
+- [ ] Browser console is clean (no errors or warnings)
+- [ ] All functionality works as expected
+- [ ] Code follows existing project patterns
+- [ ] Changes are consistent with the rest of the codebase
+
+
+
+IMPORTANT: ALL styling and design decisions must follow the Design Reference section above EXACTLY. Do not make arbitrary design choices.
+
+Analyze the existing project structure and implement the task following the patterns already established. Ensure all success criteria are met.
