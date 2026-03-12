@@ -16,7 +16,7 @@ export function ProtectedRoute({ children }: ProtectedRouteProps) {
   if (!isInitialized || isLoading) {
     return (
       <div className="flex min-h-screen items-center justify-center bg-background" aria-busy="true" aria-live="polite">
-        <div className="h-8 w-8 animate-[spin_1s_linear_infinite] rounded-full border-2 border-border border-t-primary" />
+        <div className="h-8 w-8 rounded-full border-2 border-border border-t-primary animate-spin" role="status" aria-label="Loading" />
       </div>
     )
   }

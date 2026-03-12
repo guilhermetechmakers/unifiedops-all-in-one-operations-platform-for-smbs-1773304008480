@@ -70,14 +70,12 @@ LANGUAGE plpgsql
 SECURITY DEFINER SET search_path = public
 AS $$
 BEGIN
-  INSERT INTO public.profiles (id, full_name, avatar_url, role, email_verified, is_active)
+  INSERT INTO public.profiles (id, full_name, avatar_url, role)
   VALUES (
     NEW.id,
     COALESCE(NEW.raw_user_meta_data->>'full_name', NEW.raw_user_meta_data->>'name'),
     NEW.raw_user_meta_data->>'avatar_url',
-    'member',
-    COALESCE((NEW.raw_user_meta_data->>'email_verified')::boolean, false),
-    true
+    'member'
   )
   ON CONFLICT (id) DO UPDATE SET
     full_name = COALESCE(EXCLUDED.full_name, profiles.full_name),

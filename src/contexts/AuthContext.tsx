@@ -79,6 +79,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setSession(null)
       setUser(null)
       setProfile(null)
+      if (typeof localStorage !== 'undefined') localStorage.removeItem('auth_token')
       setIsLoading(false)
       setIsInitialized(true)
       return
@@ -86,6 +87,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const { data } = await client.auth.getSession()
     setSession(data.session)
     setUser(data.session?.user ?? null)
+    if (typeof localStorage !== 'undefined') {
+      if (data.session?.access_token) {
+        localStorage.setItem('auth_token', data.session.access_token)
+      } else {
+        localStorage.removeItem('auth_token')
+      }
+    }
     if (data.session?.user?.id) {
       const p = await fetchProfile(data.session.user.id)
       setProfile(p)
@@ -109,6 +117,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     } = client.auth.onAuthStateChange((_event, session) => {
       setSession(session)
       setUser(session?.user ?? null)
+      if (typeof localStorage !== 'undefined') {
+        if (session?.access_token) {
+          localStorage.setItem('auth_token', session.access_token)
+        } else {
+          localStorage.removeItem('auth_token')
+        }
+      }
       if (session?.user?.id) {
         fetchProfile(session.user.id).then(setProfile)
       } else {
