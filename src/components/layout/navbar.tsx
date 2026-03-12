@@ -1,6 +1,7 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
+import { useOptionalAuth } from '@/contexts/AuthContext'
 
 const navLinks = [
   { to: '/', label: 'Features' },
@@ -11,6 +12,14 @@ const navLinks = [
 ]
 
 export function Navbar({ className }: { className?: string }) {
+  const auth = useOptionalAuth()
+  const navigate = useNavigate()
+  const user = auth?.user ?? null
+
+  const handleSignOut = () => {
+    void auth?.signOut().then(() => navigate('/'))
+  }
+
   return (
     <header
       className={cn(
@@ -34,12 +43,25 @@ export function Navbar({ className }: { className?: string }) {
           ))}
         </nav>
         <div className="flex items-center gap-3">
-          <Button variant="ghost" asChild>
-            <Link to="/login">Log in</Link>
-          </Button>
-          <Button asChild>
-            <Link to="/signup">Start free trial</Link>
-          </Button>
+          {user ? (
+            <>
+              <Button variant="ghost" asChild>
+                <Link to="/dashboard">Dashboard</Link>
+              </Button>
+              <Button variant="outline" onClick={handleSignOut}>
+                Sign out
+              </Button>
+            </>
+          ) : (
+            <>
+              <Button variant="ghost" asChild>
+                <Link to="/login">Log in</Link>
+              </Button>
+              <Button asChild>
+                <Link to="/signup">Start free trial</Link>
+              </Button>
+            </>
+          )}
         </div>
       </div>
     </header>

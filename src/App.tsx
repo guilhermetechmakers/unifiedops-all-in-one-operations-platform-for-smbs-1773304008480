@@ -29,6 +29,8 @@ import Settings from '@/pages/dashboard/Settings'
 import CreateInvoice from '@/pages/dashboard/CreateInvoice'
 import CreateCustomer from '@/pages/dashboard/CreateCustomer'
 import UserProfile from '@/pages/dashboard/UserProfile'
+import CreateProject from '@/pages/dashboard/CreateProject'
+import ProjectDetail from '@/pages/dashboard/ProjectDetail'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -61,6 +63,8 @@ function App() {
             <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
             <Route path="/dashboard/crm" element={<ProtectedRoute><CrmList /></ProtectedRoute>} />
             <Route path="/dashboard/projects" element={<ProtectedRoute><ProjectsBoard /></ProtectedRoute>} />
+            <Route path="/dashboard/projects/new" element={<ProtectedRoute><CreateProject /></ProtectedRoute>} />
+            <Route path="/dashboard/projects/:id" element={<ProtectedRoute><ProjectDetail /></ProtectedRoute>} />
             <Route path="/dashboard/finance" element={<ProtectedRoute><FinanceOverview /></ProtectedRoute>} />
             <Route path="/dashboard/documents" element={<ProtectedRoute><Documents /></ProtectedRoute>} />
             <Route path="/dashboard/messaging" element={<ProtectedRoute><Messaging /></ProtectedRoute>} />
