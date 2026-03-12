@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback } from 'react'
+import { useState, useMemo, useCallback, useEffect } from 'react'
 import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
@@ -40,6 +40,9 @@ export function TemplateEditor({
   disabled = false,
 }: TemplateEditorProps) {
   const [localHtml, setLocalHtml] = useState(html)
+  useEffect(() => {
+    setLocalHtml((prev) => (html !== prev ? html : prev))
+  }, [html])
   const safeVariables = useMemo(
     () => ({
       customer_name: variables.customer_name ?? 'Acme Corp',
