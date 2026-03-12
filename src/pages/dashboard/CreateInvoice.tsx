@@ -25,7 +25,7 @@ import {
 } from '@/lib/api'
 import type { InvoiceLineItem, InvoiceTemplate } from '@/types/invoicing'
 import { useQuery } from '@tanstack/react-query'
-import { FileText, Send, Save } from 'lucide-react'
+import { Send, Save } from 'lucide-react'
 
 const createInvoiceSchema = z.object({
   customer_id: z.string().min(1, 'Select a customer'),

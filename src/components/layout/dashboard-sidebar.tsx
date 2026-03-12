@@ -11,6 +11,8 @@ import {
   ChevronLeft,
   ChevronRight,
   User,
+  Receipt,
+  CreditCard,
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
@@ -21,6 +23,8 @@ const navItems = [
   { to: '/dashboard/crm', label: 'CRM', icon: Users },
   { to: '/dashboard/projects', label: 'Projects', icon: FolderKanban },
   { to: '/dashboard/finance', label: 'Finance', icon: Wallet },
+  { to: '/dashboard/invoices', label: 'Invoices', icon: Receipt },
+  { to: '/dashboard/subscription', label: 'Subscription', icon: CreditCard },
   { to: '/dashboard/documents', label: 'Documents', icon: FileText },
   { to: '/dashboard/messaging', label: 'Messaging', icon: MessageSquare },
   { to: '/dashboard/analytics', label: 'Analytics', icon: BarChart3 },

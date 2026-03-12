@@ -27,6 +27,9 @@ import Messaging from '@/pages/dashboard/Messaging'
 import Analytics from '@/pages/dashboard/Analytics'
 import Settings from '@/pages/dashboard/Settings'
 import CreateInvoice from '@/pages/dashboard/CreateInvoice'
+import InvoiceList from '@/pages/dashboard/InvoiceList'
+import InvoiceDetail from '@/pages/dashboard/InvoiceDetail'
+import SubscriptionManagement from '@/pages/dashboard/SubscriptionManagement'
 import CreateCustomer from '@/pages/dashboard/CreateCustomer'
 import UserProfile from '@/pages/dashboard/UserProfile'
 import CreateProject from '@/pages/dashboard/CreateProject'
@@ -71,7 +74,10 @@ function App() {
             <Route path="/dashboard/analytics" element={<ProtectedRoute><Analytics /></ProtectedRoute>} />
             <Route path="/dashboard/settings" element={<ProtectedRoute><Settings /></ProtectedRoute>} />
             <Route path="/dashboard/profile" element={<ProtectedRoute><UserProfile /></ProtectedRoute>} />
+            <Route path="/dashboard/invoices" element={<ProtectedRoute><InvoiceList /></ProtectedRoute>} />
             <Route path="/dashboard/invoices/new" element={<ProtectedRoute><CreateInvoice /></ProtectedRoute>} />
+            <Route path="/dashboard/invoices/:id" element={<ProtectedRoute><InvoiceDetail /></ProtectedRoute>} />
+            <Route path="/dashboard/subscription" element={<ProtectedRoute><SubscriptionManagement /></ProtectedRoute>} />
             <Route path="/dashboard/crm/new" element={<ProtectedRoute><CreateCustomer /></ProtectedRoute>} />
             <Route path="/500" element={<ServerError />} />
             <Route path="*" element={<NotFound />} />

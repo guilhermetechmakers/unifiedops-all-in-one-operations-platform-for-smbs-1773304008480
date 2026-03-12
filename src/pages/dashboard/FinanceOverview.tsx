@@ -67,7 +67,7 @@ export default function FinanceOverview() {
               </CardContent>
             </Card>
             <div className="flex gap-3">
-              <Button variant="outline" asChild><Link to="/dashboard/transactions">Transactions</Link></Button>
+              <Button variant="outline" asChild><Link to="/dashboard/invoices">Invoices</Link></Button>
               <Button variant="outline" asChild><Link to="/dashboard/subscription">Subscription</Link></Button>
             </div>
           </AnimatedPage>

@@ -17,7 +17,6 @@ import type {
   RecordPaymentInput,
   Plan,
   Subscription,
-  RecurringInvoice,
 } from '@/types/invoicing'
 
 const getSupabaseUrl = (): string => {
@@ -391,16 +390,44 @@ export async function updateSubscription(
   payload: { plan_id?: string; billing_cycle?: string; payment_method_id?: string; auto_renew?: boolean }
 ): Promise<{ error?: string }> {
   if (!supabase) return { error: 'Supabase not configured' }
-  const { error } = await supabase
+  const { data: existing } = await supabase
     .from('subscriptions')
-    .upsert(
-      {
-        organization_id: organizationId,
-        ...payload,
-        updated_at: new Date().toISOString(),
-      },
-      { onConflict: 'organization_id' }
-    )
-  if (error) return { error: error.message }
+    .select('id')
+    .eq('organization_id', organizationId)
+    .maybeSingle()
+  const row = {
+    organization_id: organizationId,
+    plan_id: payload.plan_id ?? (existing ? undefined : undefined),
+    status: 'active',
+    billing_cycle: payload.billing_cycle ?? 'monthly',
+    payment_method_id: payload.payment_method_id ?? null,
+    auto_renew: payload.auto_renew ?? true,
+    updated_at: new Date().toISOString(),
+    ...payload,
+  }
+  if (existing) {
+    const { error } = await supabase
+      .from('subscriptions')
+      .update({
+        plan_id: payload.plan_id,
+        billing_cycle: payload.billing_cycle,
+        payment_method_id: payload.payment_method_id,
+        auto_renew: payload.auto_renew,
+        updated_at: row.updated_at,
+      })
+      .eq('organization_id', organizationId)
+    if (error) return { error: error.message }
+  } else {
+    if (!payload.plan_id) return { error: 'plan_id required for new subscription' }
+    const { error } = await supabase.from('subscriptions').insert({
+      organization_id: organizationId,
+      plan_id: payload.plan_id,
+      status: 'active',
+      billing_cycle: payload.billing_cycle ?? 'monthly',
+      payment_method_id: payload.payment_method_id ?? null,
+      auto_renew: payload.auto_renew ?? true,
+    })
+    if (error) return { error: error.message }
+  }
   return {}
 }
