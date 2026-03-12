@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { Toaster } from 'sonner'
 
@@ -28,6 +28,7 @@ import Analytics from '@/pages/dashboard/Analytics'
 import Settings from '@/pages/dashboard/Settings'
 import CreateInvoice from '@/pages/dashboard/CreateInvoice'
 import CreateCustomer from '@/pages/dashboard/CreateCustomer'
+import UserProfile from '@/pages/dashboard/UserProfile'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -44,31 +45,34 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Landing />} />
-          <Route path="/privacy" element={<Privacy />} />
-          <Route path="/terms" element={<Terms />} />
-          <Route path="/cookies" element={<CookiePolicy />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/help" element={<Help />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/password-reset" element={<PasswordReset />} />
-          <Route path="/verify-email" element={<EmailVerification />} />
-          <Route path="/onboarding" element={<Onboarding />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/dashboard/crm" element={<CrmList />} />
-          <Route path="/dashboard/projects" element={<ProjectsBoard />} />
-          <Route path="/dashboard/finance" element={<FinanceOverview />} />
-          <Route path="/dashboard/documents" element={<Documents />} />
-          <Route path="/dashboard/messaging" element={<Messaging />} />
-          <Route path="/dashboard/analytics" element={<Analytics />} />
-          <Route path="/dashboard/settings" element={<Settings />} />
-          <Route path="/dashboard/invoices/new" element={<CreateInvoice />} />
-          <Route path="/dashboard/crm/new" element={<CreateCustomer />} />
-          <Route path="/500" element={<ServerError />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+        <AuthProvider>
+          <Routes>
+            <Route path="/" element={<Landing />} />
+            <Route path="/privacy" element={<Privacy />} />
+            <Route path="/terms" element={<Terms />} />
+            <Route path="/cookies" element={<CookiePolicy />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/help" element={<Help />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/password-reset" element={<PasswordReset />} />
+            <Route path="/verify-email" element={<EmailVerification />} />
+            <Route path="/onboarding" element={<Onboarding />} />
+            <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+            <Route path="/dashboard/crm" element={<ProtectedRoute><CrmList /></ProtectedRoute>} />
+            <Route path="/dashboard/projects" element={<ProtectedRoute><ProjectsBoard /></ProtectedRoute>} />
+            <Route path="/dashboard/finance" element={<ProtectedRoute><FinanceOverview /></ProtectedRoute>} />
+            <Route path="/dashboard/documents" element={<ProtectedRoute><Documents /></ProtectedRoute>} />
+            <Route path="/dashboard/messaging" element={<ProtectedRoute><Messaging /></ProtectedRoute>} />
+            <Route path="/dashboard/analytics" element={<ProtectedRoute><Analytics /></ProtectedRoute>} />
+            <Route path="/dashboard/settings" element={<ProtectedRoute><Settings /></ProtectedRoute>} />
+            <Route path="/dashboard/profile" element={<ProtectedRoute><UserProfile /></ProtectedRoute>} />
+            <Route path="/dashboard/invoices/new" element={<ProtectedRoute><CreateInvoice /></ProtectedRoute>} />
+            <Route path="/dashboard/crm/new" element={<ProtectedRoute><CreateCustomer /></ProtectedRoute>} />
+            <Route path="/500" element={<ServerError />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </AuthProvider>
       </BrowserRouter>
       <Toaster position="top-right" richColors />
     </QueryClientProvider>
