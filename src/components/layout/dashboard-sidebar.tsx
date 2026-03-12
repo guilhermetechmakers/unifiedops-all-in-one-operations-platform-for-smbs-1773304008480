@@ -10,6 +10,7 @@ import {
   BarChart3,
   ChevronLeft,
   ChevronRight,
+  User,
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
@@ -23,6 +24,7 @@ const navItems = [
   { to: '/dashboard/documents', label: 'Documents', icon: FileText },
   { to: '/dashboard/messaging', label: 'Messaging', icon: MessageSquare },
   { to: '/dashboard/analytics', label: 'Analytics', icon: BarChart3 },
+  { to: '/dashboard/profile', label: 'Profile', icon: User },
   { to: '/dashboard/settings', label: 'Settings', icon: Settings },
 ]
 

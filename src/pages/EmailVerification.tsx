@@ -47,8 +47,13 @@ export default function EmailVerification() {
       toast.error('Unable to resend. Try signing up again with the same email.')
       return
     }
+    const emailToResend = user?.email
+    if (!emailToResend) {
+      toast.error('Try signing up again with the same email to get a new link.')
+      return
+    }
     setResendCooldown(true)
-    const { error } = await client.auth.resend({ type: 'signup' })
+    const { error } = await client.auth.resend({ type: 'signup', email: emailToResend })
     if (error) {
       toast.error(error.message ?? 'Failed to resend. Try signing up again with the same email.')
     } else {

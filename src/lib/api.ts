@@ -8,7 +8,9 @@ async function apiRequest<T>(endpoint: string, options: RequestInit = {}): Promi
     'Content-Type': 'application/json',
     ...(options.headers as Record<string, string>),
   }
-  const token = typeof localStorage !== 'undefined' ? localStorage.getItem('auth_token') : null
+  // Auth token is synced from Supabase session by AuthContext (key: auth_token)
+  const token =
+    typeof localStorage !== 'undefined' ? localStorage.getItem('auth_token') : null
   if (token) {
     (headers as Record<string, string>)['Authorization'] = `Bearer ${token}`
   }

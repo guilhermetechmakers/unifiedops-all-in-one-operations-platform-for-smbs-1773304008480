@@ -13,7 +13,7 @@ import { AnimatedPage } from '@/components/AnimatedPage'
 import { useAuth } from '@/contexts/AuthContext'
 import { toast } from 'sonner'
 import { supabase } from '@/lib/supabase'
-import { User, Mail, Shield, Activity } from 'lucide-react'
+import { Mail, Shield, Activity } from 'lucide-react'
 
 const profileSchema = z.object({
   full_name: z.string().max(200).optional(),
