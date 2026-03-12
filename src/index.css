@@ -1,68 +1,90 @@
-:root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
+@layer base {
   :root {
-    color: #213547;
-    background-color: #ffffff;
+    /* UnifiedOps palette - RGB space-separated for Tailwind */
+    --background: 246 247 248;
+    --foreground: 17 24 39;
+    --card: 255 255 255;
+    --card-foreground: 17 24 39;
+    --primary: 17 24 39;
+    --primary-foreground: 255 255 255;
+    --secondary: 107 114 128;
+    --secondary-foreground: 255 255 255;
+    --accent: 45 212 191;
+    --accent-foreground: 17 24 39;
+    --muted: 191 198 205;
+    --muted-foreground: 107 114 128;
+    --border: 230 232 235;
+    --input: 230 232 235;
+    --ring: 45 212 191;
+    --radius: 0.75rem;
+    --destructive: 239 68 68;
+    --success: 16 185 129;
   }
-  a:hover {
-    color: #747bff;
+
+  .dark {
+    --background: 17 24 39;
+    --foreground: 249 250 251;
+    --card: 31 41 55;
+    --card-foreground: 249 250 251;
+    --primary: 45 212 191;
+    --primary-foreground: 17 24 39;
+    --secondary: 75 85 99;
+    --accent: 45 212 191;
+    --border: 55 65 81;
+    --input: 55 65 81;
+    --ring: 45 212 191;
   }
-  button {
-    background-color: #f9f9f9;
+}
+
+@layer base {
+  * {
+    @apply border-border;
   }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-size: 15px;
+    line-height: 1.5;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 600;
+    line-height: 1.2;
+    color: rgb(var(--foreground));
+  }
+
+  h1 { font-size: clamp(2.5rem, 5vw, 3.5rem); }
+  h2 { font-size: clamp(1.25rem, 2.5vw, 1.75rem); }
+}
+
+@layer components {
+  .container-narrow {
+    @apply mx-auto max-w-[1100px] px-6;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+:focus-visible {
+  outline: 2px solid rgb(var(--ring));
+  outline-offset: 2px;
+}
+
+@keyframes accordion-down {
+  from { height: 0; }
+  to { height: var(--radix-accordion-content-height); }
+}
+@keyframes accordion-up {
+  from { height: var(--radix-accordion-content-height); }
+  to { height: 0; }
 }
